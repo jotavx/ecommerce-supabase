@@ -1,0 +1,46 @@
+<app-spinner *ngIf="loading"></app-spinner>
+<div class="p-6 w-full sm:w-6/12">
+  <h5 class="text-xs text-blue-600">Si te asignaron un código de seguimiento al realizar la compra puedes ingresarlo
+    aquí para ver el
+    estado de tu
+    pedido.</h5>
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-4">
+    <input type="text" [(ngModel)]="trackCode" placeholder="Ingresa el código de seguimiento"
+      class="w-full sm:w-64 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    <button (click)="trackOrder(trackCode)"
+      class="px-4 py-2 bg-blue-600 text-white rounded-md text-sm font-semibold hover:bg-blue-700 transition">Buscar</button>
+  </div>
+  <div class="overflow-x-auto border border-gray-200 rounded-lg shadow-sm">
+    <table *ngIf="!loading" class="min-w-full border">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+        </tr>
+      </thead>
+
+      <!-- Si hay una orden, la mostramos -->
+      <tbody *ngIf="order; else noOrder">
+        <tr class="hover:bg-gray-50">
+          <td class="p-2 border">{{ order.id }}</td>
+          <td class="p-2 border">{{ order.users?.nombre || order.nombre || 'N/A' }}</td>
+          <td class="p-2 border">{{ order.created_at | date:'short' }}</td>
+          <td class="p-2 border">{{ order.total | currency:'ARS $':'symbol':'1.2-2' }}</td>
+          <td class="p-2 border capitalize">{{ order.estado || 'pendiente' }}</td>
+        </tr>
+      </tbody>
+
+      <!-- Si no hay orden, mostramos un mensaje alternativo -->
+      <ng-template #noOrder>
+        <tbody>
+          <tr>
+            <td class="p-2 border text-center text-gray-500" colspan="5">No order found</td>
+          </tr>
+        </tbody>
+      </ng-template>
+    </table>
+  </div>
+</div>

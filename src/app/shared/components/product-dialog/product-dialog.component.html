@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>{{ product.id ? 'Editar' : 'Crear' }} Producto</h2>
+<mat-dialog-content class="space-y-4">
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Nombre</mat-label>
+    <input matInput [(ngModel)]="product.name" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Descripción</mat-label>
+    <textarea matInput [(ngModel)]="product.description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Precio</mat-label>
+    <input matInput type="number" [(ngModel)]="product.price" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Stock</mat-label>
+    <input matInput type="number" [(ngModel)]="product.stock" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Categoría</mat-label>
+    <mat-select [(ngModel)]="product.category_id">
+      <mat-option *ngFor="let cat of categories" [value]="cat.id">
+        {{ cat.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Imagen (URL)</mat-label>
+    <input matInput [(ngModel)]="product.image_url" />
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <div mat-dialog-actions align="end">
+    <button mat-stroked-button (click)="onCancel()">Cancelar</button>
+    <button mat-stroked-button color="primary" (click)="onSave()">Aceptar</button>
+  </div>
+</mat-dialog-actions>
