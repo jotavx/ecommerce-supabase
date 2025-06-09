@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>{{ category.id ? 'Editar' : 'Crear' }} Categoría</h2>
+<mat-dialog-content class="space-y-4">
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Nombre</mat-label>
+    <input matInput [(ngModel)]="category.name" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Descripción</mat-label>
+    <textarea matInput [(ngModel)]="category.description"></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-flat-button color="primary" (click)="onSave()">Guardar</button>
+</mat-dialog-actions>

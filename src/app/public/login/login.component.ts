@@ -42,6 +42,9 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  //Analizar si deberíamos agregar persistencia de sesión
+  //Si es así, se puede usar el método `signInWithPassword` de Supabase con la opción `persistSession: true`
+
   async onLogin() {
     try {
       const { data, error } =
